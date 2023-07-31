@@ -25,8 +25,15 @@ public class Star : MonoBehaviour
         if (other.TryGetComponent(out Ball _))
         {
             onCollected.Invoke();
-            particleSystem.Play();
+            PlayEffect();
             Destroy(gameObject);
         }
+    }
+
+    private void PlayEffect()
+    {
+        particleSystem.transform.SetParent(null);
+        particleSystem.Play();
+        Destroy(particleSystem.gameObject, particleSystem.main.duration);
     }
 }

@@ -5,23 +5,35 @@ using UnityEngine;
 
 namespace Ui
 {
+    [RequireComponent(typeof(Canvas))]
     public class WinPopupUi : MonoBehaviour
     {
         [SerializeField] private List<WinStarUi> stars;
+        [SerializeField] private float delay = 0.3f;
+        private Canvas canvas;
 
         private void Awake()
         {
+            canvas = GetComponent<Canvas>();
+            
             foreach (var winStarUi in stars)
             {
                 winStarUi.Hide();
             }
-            gameObject.SetActive(false);
+
+            canvas.enabled = false;
         }
 
         public void Show(int starsCount)
         {
-            gameObject.SetActive(true);
-            StartCoroutine(ShowStars(starsCount));
+            StartCoroutine(DelayedShow(starsCount));
+        }
+
+        private IEnumerator DelayedShow(int starsCount)
+        {
+            yield return new WaitForSeconds(delay);
+            canvas.enabled = true;
+            yield return ShowStars(starsCount);
         }
 
         private IEnumerator ShowStars(int count)
