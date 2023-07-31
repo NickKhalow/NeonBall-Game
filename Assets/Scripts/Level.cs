@@ -1,4 +1,5 @@
 using Extensions;
+using Inputs;
 using Ui;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class Level : MonoBehaviour
     [SerializeField] private Finish finish;
     [SerializeField] private WinPopupUi winPopupUi;
     [SerializeField] private CollectedStars collectedStars;
+    [Header("Optional")] [SerializeField] private JoystickInput joystickInput;
 
     private void Awake()
     {
@@ -21,6 +23,10 @@ public class Level : MonoBehaviour
             {
                 Debug.Log("Show win popup!");
                 winPopupUi.Show(collectedStars.Count);
+                if (joystickInput)
+                {
+                    joystickInput.gameObject.SetActive(false);
+                }
             }
         );
     }
