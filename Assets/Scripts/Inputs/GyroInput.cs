@@ -7,7 +7,7 @@ namespace Inputs
         public override Vector2 Direction()
         {
             var raw = Input.acceleration;
-            return new Vector2(raw.x, raw.z);
+            return new Vector2(raw.x, -raw.z);
         }
     }
 }
