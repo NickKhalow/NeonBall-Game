@@ -1,4 +1,6 @@
 using System;
+using Extensions;
+using Settings;
 using UnityEngine;
 
 namespace Inputs
@@ -8,29 +10,20 @@ namespace Inputs
         
         [SerializeField] private AbstractInput gyro;
         [SerializeField] private AbstractInput joystick;
-        [SerializeField] private Active active = Active.Joystick;
+        [SerializeField] private AbstractInputSettingsStorage inputSettingsStorage;
 
-        public override Vector2 Direction() => active switch
+        private void Awake()
+        {
+            gyro.EnsureNotNull(nameof(gyro));
+            joystick.EnsureNotNull(nameof(joystick));
+            inputSettingsStorage.EnsureNotNull(nameof(inputSettingsStorage));
+        }
+
+        public override Vector2 Direction() => inputSettingsStorage.Current() switch
         {
             Active.Gyro => gyro.Direction(),
             Active.Joystick => joystick.Direction(),
             _ => throw new ArgumentOutOfRangeException()
         };
-
-        public void Select(Active select)
-        {
-            active = select;
-        }
-
-        public Active Current()
-        {
-            return active;
-        }
-
-        public enum Active
-        {
-            Gyro,
-            Joystick
-        }
     }
 }
