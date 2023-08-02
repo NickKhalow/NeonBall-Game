@@ -21,8 +21,8 @@ namespace Inputs
 
         public override Vector2 Direction() => inputSettingsStorage.Current() switch
         {
-            Active.Gyro => gyro.Direction(),
-            Active.Joystick => joystick.Direction(),
+            ActiveInput.Gyro => gyro.Direction(),
+            ActiveInput.Joystick => joystick.Direction(),
             _ => throw new ArgumentOutOfRangeException()
         };
     }

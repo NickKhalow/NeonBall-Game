@@ -1,6 +1,6 @@
 namespace Settings
 {
-    public enum Active
+    public enum ActiveInput
     {
         Gyro,
         Joystick

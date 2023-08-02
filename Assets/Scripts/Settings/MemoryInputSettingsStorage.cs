@@ -1,19 +1,20 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Settings
 {
     public class MemoryInputSettingsStorage : AbstractInputSettingsStorage
     {
-        [SerializeField] private Active active = Active.Joystick;
+        [FormerlySerializedAs("active")] [SerializeField] private ActiveInput activeInput = ActiveInput.Joystick;
 
-        public override void Select(Active select)
+        public override void Select(ActiveInput select)
         {
-            active = select;
+            activeInput = select;
         }
 
-        public override Active Current()
+        public override ActiveInput Current()
         {
-            return active;
+            return activeInput;
         }
     }
 }

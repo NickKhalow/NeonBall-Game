@@ -6,14 +6,14 @@ namespace Settings
     public class PlayerPrefsInputSettingsStorage : AbstractInputSettingsStorage
     {
         [SerializeField] private string keyInputSettings = nameof(keyInputSettings);
-        [SerializeField] private Active defaultOption = Active.Joystick;
+        [SerializeField] private ActiveInput defaultOption = ActiveInput.Joystick;
 
-        public override void Select(Active select)
+        public override void Select(ActiveInput select)
         {
             PlayerPrefs.SetString(keyInputSettings, select.ToString());
         }
 
-        public override Active Current()
+        public override ActiveInput Current()
         {
             var raw = PlayerPrefs.GetString(keyInputSettings, string.Empty);
             if (string.IsNullOrWhiteSpace(raw))
@@ -21,7 +21,7 @@ namespace Settings
                 return defaultOption;
             }
 
-            if (Enum.TryParse<Active>(raw, out var result))
+            if (Enum.TryParse<ActiveInput>(raw, out var result))
             {
                 return result;
             }

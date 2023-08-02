@@ -7,20 +7,20 @@ namespace Settings
     public class CachedInputSettingsStorage : AbstractInputSettingsStorage
     {
         [SerializeField] private AbstractInputSettingsStorage origin;
-        private Active? current;
+        private ActiveInput? current;
 
         private void Awake()
         {
             origin.EnsureNotNull("Storage is not specified");
         }
 
-        public override void Select(Active select)
+        public override void Select(ActiveInput select)
         {
             origin.Select(select);
             current = select;
         }
 
-        public override Active Current()
+        public override ActiveInput Current()
         {
             if (current.HasValue == false)
             {

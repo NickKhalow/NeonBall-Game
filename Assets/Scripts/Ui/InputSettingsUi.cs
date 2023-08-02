@@ -21,8 +21,7 @@ namespace Ui
         private void Start()
         {
             dropdown.ClearOptions();
-            dropdown.AddOptions(Enum.GetNames(typeof(Active)).ToList());
-            //set initial
+            dropdown.AddOptions(Enum.GetNames(typeof(ActiveInput)).ToList());
             dropdown.SetValueWithoutNotify(
                 dropdown
                     .options
@@ -31,10 +30,9 @@ namespace Ui
             dropdown.RefreshShownValue();
             dropdown.onValueChanged.AddListener(e =>
                 inputSettingsStorage.Select(
-                    Enum.Parse<Active>(dropdown.options[e].text)
+                    Enum.Parse<ActiveInput>(dropdown.options[e].text)
                 )
             );
-            //on update value
         }
     }
 }
